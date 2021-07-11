@@ -8,15 +8,18 @@ const StatisticsSchema = new Schema({
   dislikeCount: Number,
 });
 
-const VideoSchema = new Schema({
-  title: String,
-  image: String,
-  url: String,
-  channelName: String,
-  channelImage: String,
-  publisedOn: String,
-  statistics: StatisticsSchema,
-});
+const VideoSchema = new Schema(
+  {
+    title: String,
+    image: String,
+    url: String,
+    channelName: String,
+    channelImage: String,
+    publisedOn: String,
+    statistics: StatisticsSchema,
+  },
+  { timestamps: true }
+);
 
 const Video = mongoose.model("Video", VideoSchema);
 
