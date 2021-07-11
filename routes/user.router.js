@@ -1,4 +1,5 @@
 const express = require("express");
+const { authenticateToken } = require("../authenticateToken");
 const {
   loginWithCredentials,
   signUpHandler,
