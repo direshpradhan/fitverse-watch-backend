@@ -5,6 +5,8 @@ const { intializeDBConnection } = require("./db/db.connect");
 const { addVideosToDatabase } = require("./models/videos.model");
 const videoRouter = require("./routes/videos.router");
 const userRouter = require("./routes/user.router");
+const watchLaterRouter = require("./routes/watchLater.router");
+const { authenticateToken } = require("./authenticateToken");
 const app = express();
 
 app.use(bodyParser.json());
@@ -20,5 +22,7 @@ intializeDBConnection();
 
 app.use("/videos", videoRouter);
 app.use("/user", userRouter);
+app.use(authenticateToken);
+app.use("/watch-later", watchLaterRouter);
 
 app.listen(3000, () => console.log("Server Started"));
