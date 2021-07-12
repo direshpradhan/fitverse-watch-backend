@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
-const WatchLaterSchema = new Schema(
+const HistorySchema = new Schema(
   {
     _id: { type: Schema.Types.ObjectId, ref: "User" },
     videos: [
@@ -13,6 +13,6 @@ const WatchLaterSchema = new Schema(
   { timestamps: true }
 );
 
-const WatchLater = mongoose.model("watchlater-video", WatchLaterSchema);
+const History = mongoose.model("history-video", HistorySchema);
 
-module.exports = { WatchLater };
+module.exports = { History };

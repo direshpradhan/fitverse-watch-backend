@@ -13,6 +13,6 @@ const LikedVideoSchema = new Schema(
   { timestamps: true }
 );
 
-const LikedVideo = mongoose.model("likedVideo", LikedVideoSchema);
+const LikedVideo = mongoose.model("liked-video", LikedVideoSchema);
 
 module.exports = { LikedVideo };

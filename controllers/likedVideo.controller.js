@@ -4,7 +4,7 @@ const getLikedVideos = async (req, res) => {
   const { userId } = req.user;
   try {
     const videos = await LikedVideo.findById(userId).populate("videos._id");
-    res.json({ success: true, videos });
+    res.json({ success: true, videos: videos.videos });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }
