@@ -1,20 +1,20 @@
-const { WatchLater } = require("../models/watchLater.model");
+const { LikedVideo } = require("../models/likedVideo.model");
 
-const getWatchLaterVideos = async (req, res) => {
+const getLikedVideos = async (req, res) => {
   const { userId } = req.user;
   try {
-    const videos = await WatchLater.findById(userId).populate("videos._id");
+    const videos = await LikedVideo.findById(userId).populate("videos._id");
     res.json({ success: true, videos });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }
 };
 
-const addToWatchLater = async (req, res) => {
+const addToLikedVideo = async (req, res) => {
   const { id } = req.body.video;
   const { userId } = req.user;
   try {
-    const user = await WatchLater.findById(userId);
+    const user = await LikedVideo.findById(userId);
     if (user) {
       const newVideo = { _id: id };
       const isInVideosArray = user.videos.find(
@@ -23,47 +23,47 @@ const addToWatchLater = async (req, res) => {
       if (isInVideosArray) {
         return res.json({
           success: false,
-          message: "Video already exists in watch later",
+          message: "Video already exists in liked videos",
         });
       }
       user.videos.push(newVideo);
       await user.save();
       return res.json({
         success: true,
-        message: "Video added to watch later successfully",
+        message: "Video added to liked videos successfully",
       });
     }
-    const newWatchLaterArray = new WatchLater({
+    const newLikedVideosArray = new LikedVideo({
       _id: userId,
       videos: [{ _id: id }],
     });
-    await newWatchLaterArray.save();
+    await newLikedVideosArray.save();
     return res.json({
       success: true,
-      message: "Watch later created and video added successfully",
-      newWatchLaterArray,
+      message: "Liked Videos created and video added successfully",
+      newLikedVideosArray,
     });
   } catch (error) {
     console.log(error);
   }
 };
 
-const removeFromWatchLater = async (req, res) => {
+const removeFromLikedVideo = async (req, res) => {
   const { videoId } = req.params;
   const { userId } = req.user;
   try {
-    const user = await WatchLater.findById(userId);
+    const user = await LikedVideo.findById(userId);
     await user.videos.remove(videoId);
     await user.save();
 
     res.status(201).json({
       success: true,
-      message: "Video removed from watch later",
-      newWatchLaterArray: user.videos,
+      message: "Video removed from liked videos",
+      newLikedVideosArray: user.videos,
     });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }
 };
 
-module.exports = { getWatchLaterVideos, addToWatchLater, removeFromWatchLater };
+module.exports = { getLikedVideos, addToLikedVideo, removeFromLikedVideo };
