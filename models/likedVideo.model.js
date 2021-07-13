@@ -3,10 +3,10 @@ const { Schema } = mongoose;
 
 const LikedVideoSchema = new Schema(
   {
-    _id: { type: Schema.Types.ObjectId, ref: "User" },
+    _id: { type: Schema.Types.ObjectId, ref: "user" },
     videos: [
       {
-        _id: { type: Schema.Types.ObjectId, ref: "Video" },
+        _id: { type: Schema.Types.ObjectId, ref: "video" },
       },
     ],
   },

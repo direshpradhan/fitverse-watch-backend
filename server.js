@@ -8,6 +8,7 @@ const userRouter = require("./routes/user.router");
 const watchLaterRouter = require("./routes/watchLater.router");
 const likedVideoRouter = require("./routes/likedVideo.router");
 const historyRouter = require("./routes/history.router");
+const playlistRouter = require("./routes/playlist.router");
 const { authenticateToken } = require("./authenticateToken");
 const app = express();
 
@@ -28,5 +29,6 @@ app.use(authenticateToken);
 app.use("/watch-later", watchLaterRouter);
 app.use("/liked-videos", likedVideoRouter);
 app.use("/history", historyRouter);
+app.use("/playlist", playlistRouter);
 
 app.listen(3000, () => console.log("Server Started"));

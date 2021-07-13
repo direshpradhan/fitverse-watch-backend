@@ -21,7 +21,7 @@ const VideoSchema = new Schema(
   { timestamps: true }
 );
 
-const Video = mongoose.model("Video", VideoSchema);
+const Video = mongoose.model("video", VideoSchema);
 
 const addVideosToDatabase = async () => {
   try {
