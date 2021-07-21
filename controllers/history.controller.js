@@ -3,8 +3,8 @@ const { History } = require("../models/history.model");
 const getHistory = async (req, res) => {
   const { userId } = req.user;
   try {
-    const user = await History.findById(userId).populate("videos._id");
-    res.json({ success: true, videos: user });
+    const historyArray = await History.findById(userId);
+    res.json({ success: true, videos: historyArray.videos });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }
@@ -16,12 +16,11 @@ const addToHistory = async (req, res) => {
   try {
     const user = await History.findById(userId);
     if (user) {
-      const newVideo = { _id: id };
-      const isInHistory = user.videos.find((videoObj) => videoObj.id === id);
+      const isInHistory = user.videos.find((videoId) => videoId === id);
       if (isInHistory) {
         user.videos.remove(id);
       }
-      user.videos.push(newVideo);
+      user.videos.push(id);
       await user.save();
       return res.json({
         success: true,
@@ -29,9 +28,10 @@ const addToHistory = async (req, res) => {
         videos: user.videos,
       });
     }
+    const newVideosArray = [id];
     const newHistoryArray = new History({
       _id: userId,
-      videos: [{ _id: id }],
+      videos: newVideosArray,
     });
     await newHistoryArray.save();
 
@@ -49,7 +49,7 @@ const removeFromHistory = async (req, res) => {
   const { videoId } = req.params;
   const { userId } = req.user;
   try {
-    const user = await User.findById(userId);
+    const user = await History.findById(userId);
     await user.videos.remove(videoId);
     await user.save();
 

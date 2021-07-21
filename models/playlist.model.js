@@ -6,11 +6,7 @@ const PlaylistSchema = new Schema({
   playlist: [
     {
       name: String,
-      videos: [
-        {
-          _id: { type: Schema.Types.ObjectId, ref: "video" },
-        },
-      ],
+      videos: Array,
     },
   ],
 });

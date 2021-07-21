@@ -15,6 +15,7 @@ const getUserData = async (req, res) => {
 const loginWithCredentials = async (req, res) => {
   console.log("entered login");
   const { email, password } = req.body;
+  console.log({ email, password });
   try {
     const user = await User.findOne({ email });
     if (!user) {
@@ -31,6 +32,7 @@ const loginWithCredentials = async (req, res) => {
         process.env.SECRET_ACCESS_KEY,
         { expiresIn: "1d" }
       );
+      console.log(token);
       return res.status(201).json({
         success: true,
         message: "Logged In successfully",

@@ -1,6 +1,6 @@
 const videos = [
   {
-    id: "dI0O8TnC2d8",
+    _id: "dI0O8TnC2d8",
     title: "Best Home Workout Routine | BeerBiceps Fitness",
     image: "https://img.youtube.com/vi/dI0O8TnC2d8/hqdefault.jpg",
     url: "https://www.youtube.com/watch?v=dI0O8TnC2d8",
@@ -15,7 +15,7 @@ const videos = [
     },
   },
   {
-    id: "AXZlb-3MMYE",
+    _id: "AXZlb-3MMYE",
     title: "Guided Home Workout for Men and Women| BeerBiceps Fitness",
     image: "https://img.youtube.com/vi/AXZlb-3MMYE/hqdefault.jpg",
     url: "https://www.youtube.com/watch?v=AXZlb-3MMYE",
@@ -30,7 +30,7 @@ const videos = [
     },
   },
   {
-    id: "NK-UIRH-K_k",
+    _id: "NK-UIRH-K_k",
     title:
       "CHEST Workout for Men & Women | Beginners Chest Exercises without equipment | BeerBiceps",
     image: "https://img.youtube.com/vi/NK-UIRH-K_k/hqdefault.jpg",
@@ -46,7 +46,7 @@ const videos = [
     },
   },
   {
-    id: "TvbRwuAAsxQ",
+    _id: "TvbRwuAAsxQ",
     title:
       "Home Workout series - BACK WORKOUT for MEN & WOMEN | Exercise FORM & Training plan",
     image: "https://img.youtube.com/vi/TvbRwuAAsxQ/hqdefault.jpg",
@@ -62,7 +62,7 @@ const videos = [
     },
   },
   {
-    id: "_sCM0q_OTAA",
+    _id: "_sCM0q_OTAA",
     title:
       "AT HOME Leg Workout for Men & Women | Exercise Form & Training Plan | BeerBiceps Home Workout Series",
     image: "https://img.youtube.com/vi/_sCM0q_OTAA/hqdefault.jpg",
@@ -78,7 +78,7 @@ const videos = [
     },
   },
   {
-    id: "Qp88IAYnvWc",
+    _id: "Qp88IAYnvWc",
     title: "Home Workout||Full Body Workout At Home|| No Gym",
     image: "https://img.youtube.com/vi/Qp88IAYnvWc/hqdefault.jpg",
     url: "https://www.youtube.com/watch?v=Qp88IAYnvWc",
@@ -93,7 +93,7 @@ const videos = [
     },
   },
   {
-    id: "DOB9vG6KRBM",
+    _id: "DOB9vG6KRBM",
     title:
       "Arm Workout AT HOME For Men & Women | Exercise Form & Training Plan | BeerBiceps Home Workout Series",
     image: "https://img.youtube.com/vi/DOB9vG6KRBM/hqdefault.jpg",
@@ -109,7 +109,7 @@ const videos = [
     },
   },
   {
-    id: "g___5hT_gvw",
+    _id: "g___5hT_gvw",
     title:
       "20 Minute Desi Workout For Full Body|Full Body Home Workout|20 मिनट में घर पर करें फुल बौडी वकॉउट ||",
     image: "https://img.youtube.com/vi/g___5hT_gvw/hqdefault.jpg",
@@ -125,7 +125,7 @@ const videos = [
     },
   },
   {
-    id: "EY1WJ8FuIpo",
+    _id: "EY1WJ8FuIpo",
     title:
       "Top5 Side Fat(Love Handles) Home Workout |How to Remove Love Handles|5Min Home Workout For Side Fat",
     image: "https://img.youtube.com/vi/EY1WJ8FuIpo/hqdefault.jpg",
@@ -141,7 +141,7 @@ const videos = [
     },
   },
   {
-    id: "FfP_bGvpKTU",
+    _id: "FfP_bGvpKTU",
     title:
       "V cut Abs Workout At Home|बिना Gym घर पर बनाऐं Abs|| Glutone 250mg||Rajveer Shishodia",
     image: "https://img.youtube.com/vi/FfP_bGvpKTU/hqdefault.jpg",

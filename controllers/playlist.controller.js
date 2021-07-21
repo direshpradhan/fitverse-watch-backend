@@ -1,12 +1,14 @@
 const { Playlist } = require("../models/playlist.model");
+const mongoose = require("mongoose");
 
 const getAllPlaylists = async (req, res) => {
   const { userId } = req.user;
   try {
-    const user = await Playlist.findById(userId).populate(
+    const videos = await Playlist.findById(userId).populate(
       "playlist.videos._id"
     );
-    res.json({ success: true, videos: user });
+    console.log(videos.playlist);
+    res.json({ success: true, playlist: videos.playlist });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }
@@ -28,20 +30,25 @@ const addToPlaylist = async (req, res) => {
           playlist: user,
         });
       }
-      user.playlist.push({ name, videos: [{ _id: id }] });
+      user.playlist.push({
+        name,
+        videos: [id],
+      });
       await user.save();
       return res.json({
         success: true,
         message: `New Playlist ${name} created and added video`,
-        playlist: user,
+        newPlaylist: user.playlist[user.playlist.length - 1],
       });
     } else {
+      const newPlaylistVideosArray = [];
+      newPlaylistVideosArray.push(id);
       const newUserPlaylist = new Playlist({
         _id: userId,
         playlist: [
           {
             name,
-            videos: [{ _id: id }],
+            videos: newPlaylistVideosArray,
           },
         ],
       });
@@ -52,6 +59,28 @@ const addToPlaylist = async (req, res) => {
         newUserPlaylist,
       });
     }
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+const updatePlaylistName = async (req, res) => {
+  const { userId } = req.user;
+  const { playlistId } = req.params;
+  const { name } = req.body.playlist;
+  try {
+    const user = await Playlist.findById(userId);
+    const playlist = user.playlist.find(
+      (playlist) => playlist.id === playlistId
+    );
+    playlist.name = name;
+    await user.save();
+
+    res.json({
+      success: true,
+      message: "Updated Playlist name",
+      playlist: user.playlist,
+    });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }
@@ -115,6 +144,7 @@ const deletePlaylist = async (req, res) => {
 module.exports = {
   getAllPlaylists,
   addToPlaylist,
+  updatePlaylistName,
   removeFromPlaylist,
   clearPlaylist,
   deletePlaylist,

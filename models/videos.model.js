@@ -10,12 +10,13 @@ const StatisticsSchema = new Schema({
 
 const VideoSchema = new Schema(
   {
+    _id: String,
     title: String,
     image: String,
     url: String,
     channelName: String,
     channelImage: String,
-    publisedOn: String,
+    publishedOn: String,
     statistics: StatisticsSchema,
   },
   { timestamps: true }
