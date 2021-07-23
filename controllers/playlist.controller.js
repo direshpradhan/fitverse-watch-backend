@@ -4,11 +4,9 @@ const mongoose = require("mongoose");
 const getAllPlaylists = async (req, res) => {
   const { userId } = req.user;
   try {
-    const videos = await Playlist.findById(userId).populate(
-      "playlist.videos._id"
-    );
-    console.log(videos.playlist);
-    res.json({ success: true, playlist: videos.playlist });
+    const videos = await Playlist.findById(userId);
+    console.log(videos?.playlist);
+    res.json({ success: true, playlist: videos?.playlist });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }
@@ -41,14 +39,13 @@ const addToPlaylist = async (req, res) => {
         newPlaylist: user.playlist[user.playlist.length - 1],
       });
     } else {
-      const newPlaylistVideosArray = [];
-      newPlaylistVideosArray.push(id);
+      const newPlaylistVideosArray = [id];
       const newUserPlaylist = new Playlist({
         _id: userId,
         playlist: [
           {
             name,
-            videos: newPlaylistVideosArray,
+            videos: [id],
           },
         ],
       });
@@ -56,7 +53,7 @@ const addToPlaylist = async (req, res) => {
       return res.json({
         success: true,
         message: `Playlist ${name} created for new user and added video`,
-        newUserPlaylist,
+        newPlaylist: newUserPlaylist.playlist[0],
       });
     }
   } catch (error) {

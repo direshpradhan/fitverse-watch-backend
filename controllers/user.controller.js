@@ -56,7 +56,7 @@ const signUpHandler = async (req, res) => {
     const user = await User.findOne({ email });
     console.log(user);
     if (user) {
-      return res.json({
+      return res.status(403).json({
         success: false,
         message:
           "User with the entered email already exists. Please use a different email id",
@@ -66,9 +66,18 @@ const signUpHandler = async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     newUser.password = await bcrypt.hash(newUser.password, salt);
     const savedUser = await newUser.save();
-    res
-      .status(201)
-      .json({ success: true, message: "New user created", user: savedUser });
+    const token = jwt.sign(
+      { user: { userId: newUser._id } },
+      process.env.SECRET_ACCESS_KEY,
+      { expiresIn: "1d" }
+    );
+    console.log(token);
+    res.status(201).json({
+      success: true,
+      message: "New user created",
+      user: savedUser,
+      token,
+    });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }
