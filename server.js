@@ -31,4 +31,21 @@ app.use("/liked-videos", likedVideoRouter);
 app.use("/history", historyRouter);
 app.use("/playlist", playlistRouter);
 
+// 404 Route Handler
+app.use((req, res) => {
+  res.status(404).json({
+    success: false,
+    message: "The route you're looking for is not available.",
+  });
+});
+
+// Error Handler
+app.use((err, req, res, next) => {
+  res.status(500).json({
+    success: false,
+    message: "Server is having some issues. Try again after sometime",
+  });
+  next();
+});
+
 app.listen(3000, () => console.log("Server Started"));
